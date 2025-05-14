@@ -31,7 +31,7 @@ jobs:
         if: success() || failure()
 
       - uses: yeosu0107/xcresulttool-test-results@v1
-       with:
-         xcresult-path: TestResults.xcresult
-         output-md: test-summary.md
-       if: success() || failure()
+        with:
+          xcresult-path: TestResults.xcresult
+          output-md: test-summary.md
+        if: success() || failure()
