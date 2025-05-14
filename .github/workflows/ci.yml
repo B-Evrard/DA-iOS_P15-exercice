@@ -28,7 +28,7 @@ jobs:
           action: test
           result-bundle-path: 'TestResults/TestResults.xcresult'
           
-      - uses: kishikawakatsumi/xcresulttool@v1
+      - uses: kishikawakatsumi/xcresulttool@v1.7.1
         with:
           path: TestResults/TestResults.xcresult
         if: success() || failure()
