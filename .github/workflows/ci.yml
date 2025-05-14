@@ -28,6 +28,4 @@ jobs:
       - name: Process Test Results
         uses: kishikawakatsumi/xcresulttool@v1
         if: success() || failure()
-        with:
-          name: test-results
-          path: TestResults/TestResults.xcresult
+        
