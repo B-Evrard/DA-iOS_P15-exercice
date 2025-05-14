@@ -24,10 +24,3 @@ jobs:
           destination: 'platform=iOS Simulator,name=iPhone 16'
           action: test
           result-bundle-path: 'TestResults/results'
-
-      - name: Process Test Results
-        uses: kishikawakatsumi/xcresulttool@v1
-        if: success() || failure()
-        with:
-          path: TestResults/Results
-        
