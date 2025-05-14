@@ -26,19 +26,10 @@ jobs:
           scheme: EPCollaboratif
           destination: 'platform=iOS Simulator,name=iPhone 16'
           action: test
-          result-bundle-path: 'testResults/TestResults.xcresult'
+          result-bundle-path: 'TestResults/TestResults.xcresult'
           
       - uses: kishikawakatsumi/xcresulttool@v1
         with:
-          name: test-results
           path: TestResults/TestResults.xcresult
         if: success() || failure()
 
-      
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          name: test-results
-          path: TestResults/TestResults.xcresult
-    
