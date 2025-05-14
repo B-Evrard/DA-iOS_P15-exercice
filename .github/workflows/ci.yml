@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         
-    - name: Create test results directory
+      - name: Create test results directory
         run: mkdir -p TestResults
         
       - name: Select Xcode Version
