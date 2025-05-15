@@ -1,37 +1,43 @@
 name: iOS Build and Test
 
-on:
+on: 
   pull_request:
-    branches:
+    branches: 
       - main
 
 jobs:
   build-and-test:
     runs-on: macos-latest
 
-    steps:
+    steps: 
       - name: Checkout repository
-        uses: actions/checkout@v2
-        
-      - name: Select Xcode Version
-        run: sudo xcode-select -s /Applications/Xcode.app
+        uses: actions/checkout@v4
+
+      - name: Create test results directory
+        run: mkdir -p testResults
+
+      - name: Set up Simulator
+        run: xcrun simctl boot "iPhone 14" || true
 
       - name: Build and Test
         uses: sersoft-gmbh/xcodebuild-action@v3.2.0
         with:
           project: EPCollaboratif.xcodeproj
           scheme: EPCollaboratif
-          destination: 'platform=iOS Simulator,name=iPhone 16'
+          destination: 'platform=iOS Simulator,name=iPhone 14'
           action: test
-          result-bundle-path: 'TestResults/TestResults.xcresult'
-          
-      - uses: kishikawakatsumi/xcresulttool@v1.7.1
+          result-bundle-path: 'testResults/TestResults.xcresult'
+
+      - name: Check if Test Results Exist
+        run: |
+          if [ -d "testResults/TestResults.xcresult" ]; then
+            echo "Test results found."
+          else
+            echo "Test results not found."
+            exit 1
+          fi
+      - name: Process Test Results
+        uses: kishikawakatsumi/xcresulttool@v1
         with:
           path: TestResults/TestResults.xcresult
-        if: success() || failure()
-
-      - uses: yeosu0107/xcresulttool-test-results@v1.2.0
-        with:
-          xcresult-path: TestResults/TestResults.xcresult
-          output-md: test-summary.md
         if: success() || failure()
