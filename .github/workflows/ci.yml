@@ -32,6 +32,6 @@ jobs:
 
       - uses: yeosu0107/xcresulttool-test-results@v1.2.0
         with:
-          xcresult-path: TestResults.xcresult
+          xcresult-path: TestResults/TestResults.xcresult
           output-md: test-summary.md
         if: success() || failure()
